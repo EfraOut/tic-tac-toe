@@ -6,6 +6,12 @@ class ticatactoe
         {
             string[] board = createBoard();
             displayBoard(board);
+            bool test = true;
+            while (test)
+            {
+                string[] newBoard = playerMove(board);
+                displayBoard(newBoard);
+            }
         }
 
         static string[] createBoard()
@@ -22,5 +28,26 @@ class ticatactoe
             Console.WriteLine($"{board[3]}|{board[4]}|{board[5]}");
             Console.WriteLine($"{board[6]}|{board[7]}|{board[8]}");
             Console.WriteLine();
+        }
+
+        static string[] playerMove(string[] board)
+        {
+            bool dummyTrue = true;
+            while (dummyTrue)
+            {
+                try
+                {
+                    Console.WriteLine("Enter number: ");
+                    int x = Convert.ToInt32(Console.ReadLine());
+                    board[x - 1] = "X";
+                    dummyTrue = false;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Invalid input. Try again");
+                }
+                
+            }
+            return board;
         }
     }
