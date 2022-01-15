@@ -4,13 +4,15 @@ class ticatactoe
     {
         static void Main(string[] args)
         {
+            string player = choosePlayer("");
             string[] board = createBoard();
             displayBoard(board);
             bool test = true;
             while (test)
             {
-                string[] newBoard = playerMove(board);
+                string[] newBoard = playerMove(board, player);
                 displayBoard(newBoard);
+                player = choosePlayer(player);
             }
         }
 
@@ -30,24 +32,33 @@ class ticatactoe
             Console.WriteLine();
         }
 
-        static string[] playerMove(string[] board)
+        static string[] playerMove(string[] board, string player)
         {
             bool dummyTrue = true;
             while (dummyTrue)
             {
                 try
                 {
-                    Console.WriteLine("Enter number: ");
+                    Console.WriteLine($"Play for {player}:");
                     int x = Convert.ToInt32(Console.ReadLine());
-                    board[x - 1] = "X";
+                    board[x - 1] = player;
                     dummyTrue = false;
                 }
-                catch (Exception e)
+                catch
                 {
                     Console.WriteLine("Invalid input. Try again");
                 }
-                
             }
             return board;
+        }
+
+        static string choosePlayer(string current)
+        {
+            string player = "O";
+            if (current == "" || current == "O")
+            {
+                player = "X";
+            }
+            return player;
         }
     }
