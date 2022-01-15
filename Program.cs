@@ -1,4 +1,7 @@
-﻿using System;
+﻿// File Name: Program.cs
+// Author: Efrain Gomez
+
+using System;
 
 class ticatactoe
     {
@@ -19,7 +22,6 @@ class ticatactoe
         static string[] createBoard()
         {
             string[] board = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-
             return board;
         }
 
@@ -36,11 +38,12 @@ class ticatactoe
         {
             bool dummyTrue = true;
             while (dummyTrue)
-            {
+            {   
                 try
                 {
                     Console.WriteLine($"Play for {player}:");
                     int x = Convert.ToInt32(Console.ReadLine());
+                    x = checkInvalidMove(board, x);
                     board[x - 1] = player;
                     dummyTrue = false;
                 }
@@ -60,5 +63,16 @@ class ticatactoe
                 player = "X";
             }
             return player;
+        }
+
+        static int checkInvalidMove(string[] board, int playerInput)
+        {
+            while (board[playerInput - 1] == "X" || board[playerInput - 1] == "O")
+            {
+                displayBoard(board);
+                Console.WriteLine($"Try Again:");
+                playerInput = Convert.ToInt32(Console.ReadLine());
+            }
+            return playerInput;
         }
     }
